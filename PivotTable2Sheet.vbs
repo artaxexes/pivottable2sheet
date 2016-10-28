@@ -166,6 +166,13 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 
 		Next
 
+		' Finish the job
+		inWbk.Saved = True
+		inWbk.Close
+		inApp.Quit
+		Set inWbk = Nothing
+		Set inApp = Nothing
+
 	Next
     
 End Sub
