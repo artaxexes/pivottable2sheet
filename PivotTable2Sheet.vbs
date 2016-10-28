@@ -213,6 +213,16 @@ End Function
 
 
 
+Private Function FileExists(ByVal filePath)
+
+   Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
+   FileExists = fso.FileExists(filePath)
+   Set fso = Nothing
+
+End Function
+
+
+
 Private Sub ShowErr
 
     MsgBox "Error: " & Err.Number & vbCrLf & "Error (Hex): " & Hex(Err.Number) & vbCrLf & "Source: " & Err.Source & vbCrLf & "Description: " & Err.Description
