@@ -39,6 +39,34 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 		Dim inWbk: Set inWbk = inApp.Workbooks.Open(inFolder & inExcelBaseName, 0, True)
 		If Err.Number <> 0 Then ShowErr
 
+		If inExcel = "8485" Then
+			ReDim tableNames(5)
+			tableNames(0) = "Tabela dinâmica1"
+			tableNames(1) = "Tabela dinâmica2"
+			tableNames(2) = "Tabela dinâmica3"
+			tableNames(3) = "Tabela dinâmica6"
+			tableNames(4) = "Tabela dinâmica7"
+			tableNames(5) = "Tabela dinâmica12"
+		ElseIf inExcel = "9083" Then
+			ReDim tableNames(2)
+			tableNames(0) = "Tabela dinâmica1"
+			tableNames(1) = "Tabela dinâmica3"
+			tableNames(2) = "Tabela dinâmica7"
+		ElseIf inExcel = "1043" Then
+			ReDim tableNames(1)
+			tableNames(0) = "Tabela dinâmica1"
+			tableNames(1) = "Tabela dinâmica2"
+		Else
+			ReDim tableNames(0)
+			If inExcel = "8476" Then
+				tableNames(0) = "Tabela dinâmica5"
+			ElseIf inExcel = "8740" Then
+				tableNames(0) = "Tabela dinâmica4"
+			ElseIf inExcel = "11031" Then
+				tableNames(0) = "Tabela dinâmica1"
+			End If
+		End If
+
 	Next
     
 End Sub
