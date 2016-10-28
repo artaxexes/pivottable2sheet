@@ -156,6 +156,13 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 			If FileExists(outPath) Then
 				FileDelete(outPath)
 			End If
+			' Save the result workbook
+			outWbk.SaveAs(outPath)
+			outWbk.Close
+			outApp.Quit
+			Set outWbk = Nothing
+			Set outWst = Nothing
+			Set outApp = Nothing
 
 		Next
 
