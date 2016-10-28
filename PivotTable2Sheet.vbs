@@ -77,6 +77,42 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 			Dim pvtTbl: Set pvtTbl = inWbk.Worksheets(sheetTarget).PivotTables(tableName)
 			Dim foundYear: foundYear = False
 			Dim pgFld
+			' Table without filter
+			If (inExcel = "8485" And tableName = "Tabela dinâmica6") Or (inExcel = "9083" And (tableName = "Tabela dinâmica1" Or tableName = "Tabela dinâmica3")) Then
+				outWst.Cells(1, 1).Value = "Mês"
+				outWst.Cells(1, 2).Value = "Valor"
+				outWst.Range("A1:B1").Font.Bold = True
+				' Set visible data from current or past year
+				Dim itm
+				While foundYear = False
+					For Each itm In pvtTbl.PivotFields("ANO").PivotItems
+						If itm.Name = targetYear Then
+							itm.Visible = True
+							foundYear = True
+						Else
+							itm.Visible = False
+						End If
+					Next
+					If foundYear = False Then targetYear = targetYear - 1
+				Wend
+				' Filter by pattern in Pivot Item
+				For Each itm In pvtTbl.PivotFields("ANO").PivotItems
+					If itm.Name = CStr(targetYear) Then
+						' For every month
+						Dim i2: i2 = 2
+						Dim j2
+						For j2 = 1 To thisMonth
+							' Get pivot data from first month until current month for current year
+							outWst.Cells(i2, 1).Value = CheckMonth(j2)
+							outWst.Cells(i2, 2).Value = pvtTbl.GetPivotData(CheckMonth(j2), "ANO", targetYear).Value
+							i2 = i2 + 1
+						Next
+					End If
+				Next
+			Else
+
+			End If
+
 		Next
 
 	Next
