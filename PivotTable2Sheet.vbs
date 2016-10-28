@@ -6,8 +6,8 @@ Option Explicit
 
 
 
-Const inFolder = "in\"
-Const outFolder = "out\"
+Const inFolder = "C:\Users\anddrei.ferreira\Documents\jobs\anp\pivottable2sheet\in\"
+Const outFolder = "C:\Users\anddrei.ferreira\Documents\jobs\anp\pivottable2sheet\out\"
 
 
 Dim excelFiles: excelFiles = ExcelFilesInFolder(inFolder)
@@ -41,29 +41,29 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 
 		If inExcel = "8485" Then
 			ReDim tableNames(5)
-			tableNames(0) = "Tabela dinÃ¢mica1"
-			tableNames(1) = "Tabela dinÃ¢mica2"
-			tableNames(2) = "Tabela dinÃ¢mica3"
-			tableNames(3) = "Tabela dinÃ¢mica6"
-			tableNames(4) = "Tabela dinÃ¢mica7"
-			tableNames(5) = "Tabela dinÃ¢mica12"
+			tableNames(0) = "Tabela dinâmica1"
+			tableNames(1) = "Tabela dinâmica2"
+			tableNames(2) = "Tabela dinâmica3"
+			tableNames(3) = "Tabela dinâmica6"
+			tableNames(4) = "Tabela dinâmica7"
+			tableNames(5) = "Tabela dinâmica12"
 		ElseIf inExcel = "9083" Then
 			ReDim tableNames(2)
-			tableNames(0) = "Tabela dinÃ¢mica1"
-			tableNames(1) = "Tabela dinÃ¢mica3"
-			tableNames(2) = "Tabela dinÃ¢mica7"
+			tableNames(0) = "Tabela dinâmica1"
+			tableNames(1) = "Tabela dinâmica3"
+			tableNames(2) = "Tabela dinâmica7"
 		ElseIf inExcel = "1043" Then
 			ReDim tableNames(1)
-			tableNames(0) = "Tabela dinÃ¢mica1"
-			tableNames(1) = "Tabela dinÃ¢mica2"
+			tableNames(0) = "Tabela dinâmica1"
+			tableNames(1) = "Tabela dinâmica2"
 		Else
 			ReDim tableNames(0)
 			If inExcel = "8476" Then
-				tableNames(0) = "Tabela dinÃ¢mica5"
+				tableNames(0) = "Tabela dinâmica5"
 			ElseIf inExcel = "8740" Then
-				tableNames(0) = "Tabela dinÃ¢mica4"
+				tableNames(0) = "Tabela dinâmica4"
 			ElseIf inExcel = "11031" Then
-				tableNames(0) = "Tabela dinÃ¢mica1"
+				tableNames(0) = "Tabela dinâmica1"
 			End If
 		End If
 
@@ -78,8 +78,8 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 			Dim foundYear: foundYear = False
 			Dim pgFld
 			' Table without filter
-			If (inExcel = "8485" And tableName = "Tabela dinÃ¢mica6") Or (inExcel = "9083" And (tableName = "Tabela dinÃ¢mica1" Or tableName = "Tabela dinÃ¢mica3")) Then
-				outWst.Cells(1, 1).Value = "MÃªs"
+			If (inExcel = "8485" And tableName = "Tabela dinâmica6") Or (inExcel = "9083" And (tableName = "Tabela dinâmica1" Or tableName = "Tabela dinâmica3")) Then
+				outWst.Cells(1, 1).Value = "Mês"
 				outWst.Cells(1, 2).Value = "Valor"
 				outWst.Range("A1:B1").Font.Bold = True
 				' Set visible data from current or past year
@@ -113,7 +113,7 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 				For Each pgFld In pvtTbl.PageFields
 					Dim pgFldName: pgFldName = FieldName(inExcel, tableName)
 					If pgFld.Name = pgFldName Then
-						outWst.Cells(1, 1).Value = "Mes"
+						outWst.Cells(1, 1).Value = "Mês"
 						outWst.Cells(1, 2).Value = pgFldName
 						outWst.Cells(1, 3).Value = "Valor"
 						outWst.Range("A1:C1").Font.Bold = True
@@ -152,7 +152,7 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 			' Default name for result workbook, e.g., 2016_ASFALTO.xlsx
 			Dim outExcel: outExcel = targetYear & "_" & inExcel & "_" & tableName & ".xlsx"
 			' Delete previous result workbook if exists
-			Dim outPath: outPath = outFolder & "\" & outExcel
+			Dim outPath: outPath = outFolder & outExcel
 			If FileExists(outPath) Then
 				FileDelete(outPath)
 			End If
@@ -203,36 +203,6 @@ End Function
 
 
 
-Private Function FolderExists(ByVal folderPath)
-
-   Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
-   FolderExists = fso.FolderExists(folderPath)
-   Set fso = Nothing
-
-End Function
-
-
-
-Private Function FileExists(ByVal filePath)
-
-   Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
-   FileExists = fso.FileExists(filePath)
-   Set fso = Nothing
-
-End Function
-
-
-
-Private Sub FileDelete(filePath)
-
-    Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
-    fso.DeleteFile(filePath)
-    Set fso = Nothing
-
-End Sub
-
-
-
 Private Sub ShowErr
 
     MsgBox "Error: " & Err.Number & vbCrLf & "Error (Hex): " & Hex(Err.Number) & vbCrLf & "Source: " & Err.Source & vbCrLf & "Description: " & Err.Description
@@ -256,15 +226,45 @@ End Function
 
 
 
+Private Function FileExists(ByVal filePath)
+
+   Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
+   FileExists = fso.FileExists(filePath)
+   Set fso = Nothing
+
+End Function
+
+
+
+Private Function FolderExists(ByVal folderPath)
+
+   Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
+   FolderExists = fso.FolderExists(folderPath)
+   Set fso = Nothing
+
+End Function
+
+
+
+Private Sub FileDelete(filePath)
+
+    Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
+    fso.DeleteFile(filePath)
+    Set fso = Nothing
+
+End Sub
+
+
+
 Private Function FieldName(ByVal file, ByVal tableName)
 
 	Dim field
-	If file = "8485" And tableName = "Tabela dinÃ¢mica2" Then
+	If file = "8485" And tableName = "Tabela dinâmica2" Then
 		field = "ESTADO"
-	ElseIf file = "8485" And tableName = "Tabela dinÃ¢mica6" Then
+	ElseIf file = "8485" And tableName = "Tabela dinâmica6" Then
 		field = "REFINARIA"
 	ElseIf file = "1043" Then
-		field = "UN. DA FEDERAÃ‡ÃƒO"
+		field = "UN. DA FEDERAÇÃO"
 	ElseIf file = "8476" Then
 		field = "ORIGEM"
 	ElseIf file = "8740" Then
