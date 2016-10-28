@@ -51,3 +51,11 @@ Private Function ExcelFilesInFolder(path)
 	ExcelFilesInFolder = arrFiles
 	
 End Function
+
+Private Function FolderExists(ByVal folderPath)
+
+   Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
+   FolderExists = fso.FolderExists(folderPath)
+   Set fso = Nothing
+
+End Function
