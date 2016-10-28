@@ -20,13 +20,28 @@ Else
 End If
 
 
-
 Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 
+	Dim aHora: aHora = Now()
+	Dim thisYear: thisYear = CStr(Year(aHora))
+	Dim targetYear: targetYear = thisYear
+	Dim thisMonth: thisMonth = Month(aHora)
+	Const sheetTarget = "Plan1"
+	Dim inExcelBaseName
+	Dim tableNames()
+
+	For Each inExcelBaseName In inExcelFiles
 	
+		Dim inExcel: inExcel = Mid(inExcelBaseName, 1, InStrRev(inExcelBaseName, ".") - 1)
+
+		Dim inApp: Set inApp = CreateObject("Excel.Application")
+		inApp.DisplayAlerts = False
+		Dim inWbk: Set inWbk = inApp.Workbooks.Open(inFolder & inExcelBaseName, 0, True)
+		If Err.Number <> 0 Then ShowErr
+
+	Next
     
 End Sub
-
 
 
 
@@ -52,6 +67,8 @@ Private Function ExcelFilesInFolder(path)
 	
 End Function
 
+
+
 Private Function FolderExists(ByVal folderPath)
 
    Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
@@ -59,3 +76,12 @@ Private Function FolderExists(ByVal folderPath)
    Set fso = Nothing
 
 End Function
+
+
+
+Private Sub ShowErr
+
+    MsgBox "Error: " & Err.Number & vbCrLf & "Error (Hex): " & Hex(Err.Number) & vbCrLf & "Source: " & Err.Source & vbCrLf & "Description: " & Err.Description
+    Err.Clear
+
+End Sub
