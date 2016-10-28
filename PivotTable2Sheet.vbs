@@ -219,3 +219,17 @@ Private Sub ShowErr
     Err.Clear
 
 End Sub
+
+
+
+Private Function CheckMonth(ByVal monthTarget)
+
+    Dim strMonth
+    If monthTarget >= 1 AND monthTarget <= 12 Then
+        strMonth = MonthName(monthTarget)
+    Else
+        strMonth = "Unknown"
+    End If
+    CheckMonth = UCase(Left(strMonth, 1)) & LCase(Right(strMonth, Len(strMonth) - 1))
+
+End Function
