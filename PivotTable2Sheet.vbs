@@ -67,6 +67,18 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 			End If
 		End If
 
+		Dim tableName
+		For Each tableName In tableNames
+			Dim outApp: Set outApp = CreateObject("Excel.Application")
+			outApp.DisplayAlerts = False
+			Dim outWbk: Set outWbk = outApp.Workbooks.Add
+			Dim outWst: Set outWst = outWbk.Worksheets(1)
+			outApp.Sheets(1).Select
+			Dim pvtTbl: Set pvtTbl = inWbk.Worksheets(sheetTarget).PivotTables(tableName)
+			Dim foundYear: foundYear = False
+			Dim pgFld
+		Next
+
 	Next
     
 End Sub
