@@ -148,6 +148,15 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 					End If
 				Next
 			End If
+
+			' Default name for result workbook, e.g., 2016_ASFALTO.xlsx
+			Dim outExcel: outExcel = targetYear & "_" & inExcel & "_" & tableName & ".xlsx"
+			' Delete previous result workbook if exists
+			Dim outPath: outPath = outFolder & "\" & outExcel
+			If FileExists(outPath) Then
+				FileDelete(outPath)
+			End If
+
 		Next
 
 	Next
