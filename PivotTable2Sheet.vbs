@@ -253,3 +253,25 @@ Private Function CheckMonth(ByVal monthTarget)
     CheckMonth = UCase(Left(strMonth, 1)) & LCase(Right(strMonth, Len(strMonth) - 1))
 
 End Function
+
+
+
+Private Function FieldName(ByVal file, ByVal tableName)
+
+	Dim field
+	If file = "8485" And tableName = "Tabela dinâmica2" Then
+		field = "ESTADO"
+	ElseIf file = "8485" And tableName = "Tabela dinâmica6" Then
+		field = "REFINARIA"
+	ElseIf file = "1043" Then
+		field = "UN. DA FEDERAÇÃO"
+	ElseIf file = "8476" Then
+		field = "ORIGEM"
+	ElseIf file = "8740" Then
+		field = "PRODUTOR"
+	Else
+		field = "PRODUTO"
+	End If
+	FieldName = field
+
+End Function
