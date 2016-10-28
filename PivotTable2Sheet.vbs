@@ -223,6 +223,16 @@ End Function
 
 
 
+Private Sub FileDelete(filePath)
+
+    Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
+    fso.DeleteFile(filePath)
+    Set fso = Nothing
+
+End Sub
+
+
+
 Private Sub ShowErr
 
     MsgBox "Error: " & Err.Number & vbCrLf & "Error (Hex): " & Hex(Err.Number) & vbCrLf & "Source: " & Err.Source & vbCrLf & "Description: " & Err.Description
