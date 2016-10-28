@@ -110,9 +110,44 @@ Private Sub PivotTable2Sheet(inFolder, outFolder, inExcelFiles)
 					End If
 				Next
 			Else
-
+				For Each pgFld In pvtTbl.PageFields
+					Dim pgFldName: pgFldName = FieldName(inExcel, tableName)
+					If pgFld.Name = pgFldName Then
+						outWst.Cells(1, 1).Value = "Mes"
+						outWst.Cells(1, 2).Value = pgFldName
+						outWst.Cells(1, 3).Value = "Valor"
+						outWst.Range("A1:C1").Font.Bold = True
+						' Set visible data from current or past year
+						Dim pvtItm
+						While foundYear = False
+							For Each pvtItm In pvtTbl.PivotFields("ANO").PivotItems
+								If pvtItm.Name = targetYear Then
+									pvtItm.Visible = True
+									foundYear = True
+								Else
+									pvtItm.Visible = False
+								End If
+							Next
+							If foundYear = False Then targetYear = targetYear - 1
+						Wend
+						' For every month
+						Dim i : i = 2
+						Dim j, pgPvtItm
+						For j = 1 To thisMonth
+							' Filter by pattern in Pivot Item
+							For Each pgPvtItm In pgFld.PivotItems
+								pgFld.ClearAllFilters
+								pgFld.CurrentPage = pgPvtItm.Name
+								' Get pivot data from first month until current month for current year
+								outWst.Cells(i, 1).Value = CheckMonth(j)
+								outWst.Cells(i, 2).Value = pgPvtItm.Name
+								outWst.Cells(i, 3).Value = pvtTbl.GetPivotData(CheckMonth(j), "ANO", targetYear).Value
+								i = i + 1
+							Next
+						Next
+					End If
+				Next
 			End If
-
 		Next
 
 	Next
