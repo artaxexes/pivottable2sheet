@@ -3,7 +3,8 @@ Versão customizada do repositório pivot-table-extractor para extrair dados de 
 
 
 
-### tabela de arquivos/tabelas dinâmicas/filtros implementados:
+### Tabela de arquivos/tabelas dinâmicas/filtros implementados:
+Obs: não foi possível continuar implementação para a tabela destacada em negrito
 Arquivo | Tabela | Filtro
 --------|--------|-------
 1043.xls | "Tabela dinâmica1" | "UN. DA FEDERAÇÃO" e "ANO"
@@ -22,8 +23,9 @@ Arquivo | Tabela | Filtro
 **9083.xlsx** | **"Tabela dinâmica5"** | **"PRODUTO" e "ANO"**
 9083.xlsx | "Tabela dinâmica7" | "PRODUTO" e "ANO"
 
+ 
 
 ### To Do task list
-- [x] ler arquivos xls/xlsx contidos numa pasta
-- [x] extrair dados das tabelas dinâmicas indicadas
-- [x] salvar os dados extraídos em novas planilhas numa outra pasta
+- [x] Ler arquivos xls/xlsx contidos numa pasta
+- [x] Extrair dados das tabelas dinâmicas indicadas
+- [x] Salvar os dados extraídos em novas planilhas numa outra pasta
