@@ -4,7 +4,9 @@ Versão customizada do repositório pivot-table-extractor para extrair dados de 
 
 
 ### Tabela de arquivos/tabelas dinâmicas/filtros implementados:
+
 Obs: não foi possível continuar implementação para a tabela destacada em negrito
+
 Arquivo | Tabela | Filtro
 --------|--------|-------
 1043.xls | "Tabela dinâmica1" | "UN. DA FEDERAÇÃO" e "ANO"
